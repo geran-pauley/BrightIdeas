@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="~css/site.css" />
+    <style>
+
+
+    </style>
+</head>
+<body>
+    <h1 style="padding-bottom: 10px;">Create an Account</h1>
+        @model Users
+        <form asp-action="Register" asp-controller="Home" method="POST">
+            
+            
+            <label style="margin-top: 4px;" for="Name">Name: </label>
+            <br>
+            <input type="text" name="Name"><span style="color: red;" asp-validation-for="name"></span>
+            <br>
+
+            
+            <label style="margin-top: 4px;" for="Alias">Alias: </label>
+            <br>
+            <input type="text" name="Alias"><span style="color: red;" asp-validation-for="alias"></span>
+            <br>
+
+            
+            <label style="margin-top: 4px;" for="Email">Email: </label>
+            <br>
+            <input type="email" name="Email"><span style="color: red;" asp-validation-for="email"></span>
+            <br>
+
+            
+            <label style="margin-top: 4px;" for="Password">Password: </label>
+            <br>
+            <input type="password" name="Password"><span style="color: red;" asp-validation-for="password"></span>
+            <br>
+
+            <label style="margin-top: 4px;" for="CPassword">Confirm Password: </label>
+            <br>
+            <input type="password" name="CPassword">
+            <br>
+
+            <input style="margin-top: 4px;" value="Create Account" type="submit"></input>
+        </form>
+
+        <form action="Login" method="POST">
+            <label style="margin-top: 24px;" name="Email" >Email: </label>
+            <br>
+            <input type="email" name="Email" required>
+            <br>
+
+            <label style="margin-top: 4px;" name="PasswordToCheck" >Password: </label>
+            <br>
+            <input type="password" name="PasswordToCheck" required>
+            <br>
+            
+            <input style="margin-top: 4px;" value="Login" type="submit"></input>
+        </form>
+</body>
+</html>

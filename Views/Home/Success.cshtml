@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Success</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="~css/site.css" />
+</head>
+<style>
+    input{
+        opacity: 80%;
+        width: 300px;
+        margin-right: 10px;
+    }
+
+    .viewLikes:hover {
+        text-decoration: underline;
+        color: #25538f;
+    }
+    table tr{
+        padding: 33px;
+    }
+
+</style>
+<body>
+    <h1>Hi @ViewBag.loguser.alias!</h1>
+    <form asp-action="AddPost" asp-controller="Home" method="POST">
+        <input style="margin-bottom: 14px;"type="text" name="message" placeholder="Post something witty here..." required><button>Idea!</button>
+    </form>
+    <table>
+        <th></th>
+        <th></th>
+        <th></th>
+    @{
+        @foreach(var post in @ViewBag.Posts)
+        {
+            <tr>
+                @foreach(var user in @ViewBag.Users)
+                {
+                    @if(@user.id == @post.usersID)
+                    {
+                        <form action="UserProfile" method="POST">
+                            <input type="hidden" value="@user.id" name="userID">
+                            <td><button class="viewLikes" style="background:transparent; border:none; color:#3678ba">@user.alias says:</button></td>
+                        </form>
+                    }
+                        
+                }
+                <td>@post.message</td>
+                <td>
+                    @if(post.usersID == @ViewBag.loguser.id)
+                    {
+                        <form action="Delete" method="POST">
+                            <input type="hidden" value="@post.id" name="deletePostID">
+                            <button style="margin-left: 10px;">Delete</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+
+                <form action="AddLike" method="POST">
+                    <input type="hidden" value="@post.id" name="addLikePostID">
+                    <input type="hidden" value="@ViewBag.sessionUserBag.id" name="likeUserID">
+                    <td>
+                        <button class="viewLikes" style="background:transparent; border:none; color:#3678ba">Like</button>
+                    </td>
+                </form>
+                
+
+                <form action="Likes" method="POST">
+                    <input type="hidden" value="@post.id" name="viewLikePostID">
+                    <td style="margin-bottom: 10px;">
+                        <button class="viewLikes" style="background:transparent; border:none; color:#3678ba">@post.likes People liked this</button>
+                    </td>
+                </form>
+        }
+    }
+    </table>
+</body>
+</html>
